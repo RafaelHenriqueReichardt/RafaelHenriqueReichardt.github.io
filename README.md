@@ -2,7 +2,7 @@
 
 **Cenário escolhido:**
 
-O problema que estamos modelando é o sistema de agendamento de quartos de um hotel. O objetivo é criar uma representação lógica para a gestão de reservas, onde o sistema deve verificar a disponibilidade dos quartos e garantir que as regras do hotel sejam seguidas (ex: não permitir mais de uma reserva para o mesmo quarto no mesmo horário).
+O problema escolhido foi um sistema de agendamento de quartos de um hotel. O objetivo é criar uma representação lógica para a gestão de reservas, onde o sistema deve verificar a disponibilidade dos quartos e garantir que as regras do hotel sejam seguidas (ex: não permitir mais de uma reserva para o mesmo quarto no mesmo horário).
 
 **Entidades, Relações, Restrições e Regras:**
 
@@ -48,18 +48,18 @@ O problema que estamos modelando é o sistema de agendamento de quartos de um ho
 
 **Fórmulas Bem Formadas (FBFs):**
 
-* ( \neg P_1 \rightarrow P_2 ): Se o quarto não está disponível, então uma reserva foi feita.
-* ( P_1 \rightarrow \neg P_2 ): Se o quarto está disponível, então não há reserva feita.
+* ( ~P_1 -> P_2 ): Se o quarto não está disponível, então uma reserva foi feita.
+* ( P_1 -> ~P_2 ): Se o quarto está disponível, então não há reserva feita.
 
 **Simplificação das FBFs:**
 
-* A fórmula ( \neg P_1 \rightarrow P_2 ) é equivalente a ( P_1 \vee P_2 ) (pelo teorema da implicação).
+* A fórmula ( ~P_1 -> P_2 ) é equivalente a ( P_1 V P_2 ) (pelo teorema da implicação).
 
 **Análise semântica (Tabelas-verdade):**
 
 A tabela verdade para a proposição ( P_1 \vee P_2 ):
 
-| ( P_1 ) | ( P_2 ) | ( P_1 \vee P_2 ) |
+| ( P_1 ) | ( P_2 ) | ( P_1 V P_2 ) |
 | ------- | ------- | ---------------- |
 | T       | T       | T                |
 | T       | F       | T                |
@@ -72,15 +72,15 @@ A tabela verdade para a proposição ( P_1 \vee P_2 ):
 
 **Exemplo 1**: Suponha que queremos deduzir a possibilidade de uma reserva ser válida.
 
-1. ( \neg P_1 ) (o quarto não está disponível).
-2. ( \neg P_1 \rightarrow P_2 ) (Se o quarto não está disponível, então foi feita uma reserva).
+1. ( ~P_1 ) (o quarto não está disponível).
+2. ( ~P_1 -> P_2 ) (Se o quarto não está disponível, então foi feita uma reserva).
 3. Concluímos ( P_2 ) (foi feita uma reserva).
 
 **Exemplo 2**: Deduzindo que, se o quarto está disponível, então uma reserva não foi feita.
 
 1. ( P_1 ) (o quarto está disponível).
-2. ( P_1 \rightarrow \neg P_2 ) (Se o quarto está disponível, então não foi feita uma reserva).
-3. Concluímos ( \neg P_2 ) (não foi feita uma reserva).
+2. ( P_1 -> ~P_2 ) (Se o quarto está disponível, então não foi feita uma reserva).
+3. Concluímos ( ~P_2 ) (não foi feita uma reserva).
 
 ---
 
@@ -88,17 +88,17 @@ A tabela verdade para a proposição ( P_1 \vee P_2 ):
 
 **Converter fórmulas para CNF**:
 
-* Fórmula ( \neg P_1 \rightarrow P_2 ) pode ser reescrita em CNF como ( P_1 \vee P_2 ).
-* Fórmula ( P_1 \rightarrow \neg P_2 ) pode ser reescrita como ( \neg P_1 \vee \neg P_2 ).
+* Fórmula (~P_1 -> P_2 ) pode ser reescrita em CNF como ( P_1 V P_2 ).
+* Fórmula ( P_1 -> ~P_2 ) pode ser reescrita como ( ~ P_1 V ~P_2 ).
 
 **Aplicando a resolução**:
 
 A partir da CNF, podemos aplicar a resolução:
 
-1. ( P_1 \vee P_2 )
-2. ( \neg P_1 \vee \neg P_2 )
+1. ( P_1 v P_2 )
+2. ( ~P_1 v ~P_2 )
 
-Resolvendo ( P_1 ) e ( \neg P_1 ), temos ( P_2 \vee \neg P_2 ), que resulta em uma contradição (pois sempre será verdade). Isso indica que, se o quarto está disponível, não pode haver uma reserva conflitante.
+Resolvendo ( P_1 ) e ( ~P_1 ), temos ( P_2 v ~P_2 ), que resulta em uma contradição (pois sempre será verdade). Isso indica que, se o quarto está disponível, não pode haver uma reserva conflitante.
 
 ---
 
@@ -112,11 +112,11 @@ Resolvendo ( P_1 ) e ( \neg P_1 ), temos ( P_2 \vee \neg P_2 ), que resulta em u
 
 **Formalizando o problema**:
 
-* ( \forall c \forall q \forall t_1 \forall t_2 (Reserva(c, q, t_1, t_2) \rightarrow \neg \exists c' \exists t_1' \exists t_2' (Reserva(c', q, t_1', t_2') \wedge t_1 < t_2' \wedge t_2 > t_1')) ).
+* ( ∀c ∀q ∀t_1 ∀t_2 (Reserva(c, q, t_1, t_2) -> ~∃c' ∃t_1' ∃t_2' (Reserva(c', q, t_1', t_2') ^ t_1 < t_2' ^ t_2 > t_1')) ).
 
 **Exemplo de sentença**:
 
-* ( \forall c \exists q \exists t_1 \exists t_2 (Reserva(c, q, t_1, t_2) \rightarrow Disponivel(q, t_1, t_2)) ).
+* ( ∀c ∃q ∃t_1 ∃t_2 (Reserva(c, q, t_1, t_2) -> Disponivel(q, t_1, t_2)) ).
 
 ---
 
@@ -126,7 +126,7 @@ Resolvendo ( P_1 ) e ( \neg P_1 ), temos ( P_2 \vee \neg P_2 ), que resulta em u
 
 Um modelo para a lógica de predicados poderia ser um conjunto ( M ) que define o valor de verdade para cada predicado, função e variável no domínio, com base na interpretação dos termos. Por exemplo:
 
-* ( M = { Reserva(c_1, q_1, t_1, t_2), Disponivel(q_2, t_1, t_2) } )
+* ( M = { Reserva(c_1, q_1, t_1, t_2), Disponivel(q_1, t_1, t_2) } )
 
 **Validade, Satisfatibilidade e Contradições**:
 
@@ -144,7 +144,7 @@ Um modelo para a lógica de predicados poderia ser um conjunto ( M ) que define 
 
 **Unificação**:
 
-* Unificar ( Reserva(c_1, q_1, t_1, t_2) ) com ( Reserva(c_2, q_1, t_1, t_2) ) resultaria em uma falha, pois ( c_1 \neq c_2 ).
+* Unificar ( Reserva(c_1, q_1, t_1, t_2) ) com ( Reserva(c_2, q_1, t_1, t_2) ) resultaria em uma falha, pois ( c_1 ~c_2 ).
 
 **Resolução de Predicados**:
 
@@ -156,10 +156,7 @@ Um modelo para a lógica de predicados poderia ser um conjunto ( M ) que define 
 
 **Verificação Automática (Código em Python)**:
 
-Aqui está um exemplo simples de código Python para verificar
-
-
-se duas reservas são conflitantes:
+Aqui está um exemplo simples de código Python para verificar se duas reservas são conflitantes:
 
 ```python
 def verifica_conflito(reserva1, reserva2):
@@ -181,9 +178,12 @@ print(verifica_conflito(reserva1, reserva2))  # Deve retornar True
 
 **Autômato**:
 
-Um autômato simples pode ser usado para gerenciar o estado das reservas. Ele teria dois estados principais: `disponível` e `reservado`.
+q0=quarto está vago;
+q1=quarto está ocupado;
 
+<img width="689" height="348" alt="image" src="https://github.com/user-attachments/assets/856885ed-69f1-4fd6-b59c-e0eb6b3b430c" />
 ---
+
 
 ### 9. Conclusões e Aplicações
 
