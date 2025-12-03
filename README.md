@@ -2,7 +2,7 @@
 
 **Cenário escolhido:**
 
-O problema escolhido foi um sistema de agendamento de quartos de um hotel. O objetivo é criar uma representação lógica para a gestão de reservas, onde o sistema deve verificar a disponibilidade dos quartos e garantir que as regras do hotel sejam seguidas (ex: não permitir mais de uma reserva para o mesmo quarto no mesmo horário).
+O cenário escolhido foi um sistema de agendamento de quartos de um hotel. O objetivo é criar uma representação lógica para a gestão de reservas, onde o sistema deve verificar a disponibilidade dos quartos e garantir que as regras do hotel sejam seguidas (ex: não permitir mais de uma reserva para o mesmo quarto no mesmo horário).
 
 **Entidades, Relações, Restrições e Regras:**
 
