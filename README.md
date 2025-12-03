@@ -57,7 +57,7 @@ O problema escolhido foi um sistema de agendamento de quartos de um hotel. O obj
 
 **Análise semântica (Tabelas-verdade):**
 
-A tabela verdade para a proposição ( P_1 \vee P_2 ):
+A tabela verdade para a proposição ( P_1 V P_2 ):
 
 | ( P_1 ) | ( P_2 ) | ( P_1 V P_2 ) |
 | ------- | ------- | ---------------- |
@@ -178,8 +178,8 @@ print(verifica_conflito(reserva1, reserva2))  # Deve retornar True
 
 **Autômato**:
 
-q0=quarto está vago;
-q1=quarto está ocupado;
+* q0=quarto está vago;
+* q1=quarto está ocupado;
 
 <img width="689" height="348" alt="image" src="https://github.com/user-attachments/assets/856885ed-69f1-4fd6-b59c-e0eb6b3b430c" />
 ---
