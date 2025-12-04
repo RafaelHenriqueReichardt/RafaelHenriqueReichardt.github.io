@@ -99,7 +99,42 @@ A partir da CNF, podemos aplicar a resolução:
 2. ( ~P_1 v ~P_2 )
 
 Resolvendo ( P_1 ) e ( ~P_1 ), temos ( P_2 v ~P_2 ), que resulta em uma contradição (pois sempre será verdade). Isso indica que, se o quarto está disponível, não pode haver uma reserva conflitante.
+Exemplo:
+Vamos considerar um exemplo prático para usar a resolução proposicional. Digamos que temos as seguintes informações:
 
+O cliente c1 fez uma reserva para o quarto q1 no intervalo [t1,t2].
+
+O quarto q1 tem capacidade para 2 pessoas.
+
+O quarto q1 está disponível no intervalo [t1,t2].
+
+Queremos verificar se o cliente c2 pode fazer uma reserva para o quarto q1 no mesmo intervalo [t1,t2].
+
+Passo 1: Representação das premissas.
+
+Reserva(c1,q1,t1,t2)
+Reserva(c1,q1,t1,t2)
+
+Capacidade(q1,2)
+Capacidade(q1,2)
+
+Disponivel(q1,t1,t2)
+Disponivel(q1,t1,t2)
+
+Passo 2: Verificando se Reserva(c2,q1,t1,t2) é possível.
+
+Para que c2 possa fazer a reserva, o quarto q1 deve estar disponível no intervalo [t1,t2]. Mas como c1 já fez a reserva, temos a cláusula de disponibilidade de quarto:
+
+Reserva(c1,q1,t1,t2)->~Reserva(c2,q1,t1,t2)
+
+Ou seja, se o quarto q1 já foi reservado por c1, então c2 não pode reservar o mesmo quarto no mesmo intervalo de tempo.
+
+Passo 3: Conclusão.
+
+A proposição 
+Reserva(c2,q1,t1,t2) resulta em uma contradição com a proposição Reserva(c1,q1,t1,t2). Portanto, c2 não pode fazer a reserva para o quarto q1 no intervalo [t1,t2].
+
+Isso demonstra a aplicação de resolução proposicional para verificar a viabilidade de uma nova reserva em um sistema de hotel.
 ---
 
 ### 5. Lógica de Predicados
